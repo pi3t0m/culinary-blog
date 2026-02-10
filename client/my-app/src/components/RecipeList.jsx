@@ -4,10 +4,11 @@ import axios from 'axios';
 
 function RecipeList() {
   const [recipes, setRecipes] = useState([]);
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Pobranie danych z backendu
-    axios.get('http://localhost:5000/api/recipes')
+      axios.get(`${API}/api/recipes`)
       .then(response => {
         setRecipes(response.data);
       })

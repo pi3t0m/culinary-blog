@@ -25,6 +25,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json()); // pozwala na obsługę JSON w ciele zapytań
 app.use(cors());
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true });
+});
+app.get('/api/recipes', (req, res) => {
+  res.json([{ id: '1', title: 'Test', description: 'Działa połączenie' }]);
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -47,14 +53,14 @@ app.use(function(err, req, res, next) {
 });
 
 // Połączenie z MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('Error connecting to MongoDB:', err));
 
 // Uruchomienie serwera
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// const port = process.env.PORT || 5001;
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
 
 module.exports = app;
