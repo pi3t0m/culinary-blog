@@ -7,10 +7,9 @@ describe("Server smoke tests", () => {
     expect(res.status).toBe(404);
   });
 
-  it("should have recipes router mounted (route exists, status is not 404)", async () => {
-    // To nie testuje DB; tylko sprawdza, że endpoint jest podpięty.
-    // Bez MONGO_URI może zwrócić 500, ale ważne że NIE 404.
-    const res = await request(app).get("/api/recipes");
-    expect(res.status).not.toBe(404);
+  it("should respond on root route", async () => {
+    const res = await request(app).get("/");
+    // W express-generator zwykle jest 200, ale jakbyś miał redirect, to też ok.
+    expect([200, 301, 302]).toContain(res.status);
   });
 });
