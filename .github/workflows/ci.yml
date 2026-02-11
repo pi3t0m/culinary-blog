@@ -8,7 +8,7 @@ on:
 
 jobs:
   server:
-    name: Server
+    name: Server (my-app)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,20 +19,15 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install (server)
-        working-directory: server
-        run: npm ci
-
-      - name: Test (server)
-        working-directory: server
-        run: npm test --if-present
-
-      - name: Build (server)
-        working-directory: server
-        run: npm run build --if-present
+      - name: Install / Test / Build (server)
+        working-directory: server/my-app
+        run: |
+          npm ci
+          npm test --if-present
+          npm run build --if-present
 
   client:
-    name: Client
+    name: Client (my-app)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,14 +38,9 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install (client)
-        working-directory: client
-        run: npm ci
-
-      - name: Test (client)
-        working-directory: client
-        run: npm test --if-present
-
-      - name: Build (client)
-        working-directory: client
-        run: npm run build --if-present
+      - name: Install / Test / Build (client)
+        working-directory: client/my-app
+        run: |
+          npm ci
+          npm test --if-present
+          npm run build --if-present
