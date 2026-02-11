@@ -1,6 +1,6 @@
 // tests/recipes.test.js
 const request = require('supertest');
-const app = require('../server/my-app/app'); // Import aplikacji Express
+const app = require("../app"); 
 
 describe('Recipes API', () => {
   let recipeId;
