@@ -8,31 +8,47 @@ on:
 
 jobs:
   server:
+    name: server (test/build)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+
+      - name: Setup Node
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "20.x"
 
-      - run: npm ci
+      - name: Install (server)
+        run: npm ci
         working-directory: server
-      - run: npm test --if-present
+
+      - name: Test (server)
+        run: npm test --if-present
         working-directory: server
-      - run: npm run build --if-present
+
+      - name: Build (server)
+        run: npm run build --if-present
         working-directory: server
 
   client:
+    name: client (test/build)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
 
-      - run: npm ci
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Install (client)
+        run: npm ci
         working-directory: client
-      - run: npm test --if-present
+
+      - name: Test (client)
+        run: npm test --if-present
         working-directory: client
-      - run: npm run build --if-present
+
+      - name: Build (client)
+        run: npm run build --if-present
         working-directory: client
