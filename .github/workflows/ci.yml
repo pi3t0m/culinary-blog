@@ -7,27 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  server:
-    name: Server (my-app)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install / Test / Build (server)
-        working-directory: server/my-app
-        run: |
-          npm ci
-          npm test --if-present
-          npm run build --if-present
-
   client:
-    name: Client (my-app)
+    name: Client (Vite)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,9 +19,38 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install / Test / Build (client)
+      - name: Install
         working-directory: client/my-app
-        run: |
-          npm ci
-          npm test --if-present
-          npm run build --if-present
+        run: npm ci
+
+      - name: Test
+        working-directory: client/my-app
+        run: npm test --if-present
+
+      - name: Build
+        working-directory: client/my-app
+        run: npm run build --if-present
+
+  server:
+    name: Server (Express)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install
+        working-directory: server/my-app
+        run: npm ci
+
+      - name: Test
+        working-directory: server/my-app
+        run: npm test --if-present
+
+      - name: Build
+        working-directory: server/my-app
+        run: npm run build --if-present

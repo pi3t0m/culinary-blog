@@ -1,18 +1,20 @@
 var createError = require('http-errors');
-var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const express = require("express");
+const app = express();
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var recipesRouter = require('./routes/recipes');
 
 dotenv.config();
-var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
