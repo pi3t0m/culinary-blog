@@ -1,14 +1,20 @@
-// src/App.js
-import React from 'react';
-import RecipeList from './components/RecipeList';
+import { Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
-function App() {
+import Home from "./pages/Home";
+import Recipes from "./pages/Recipes";
+import RecipeDetails from "./pages/RecipeDetails";
+
+export default function App() {
   return (
-    <div className="App">
-      <h1>Culinary Blog</h1>
-      <RecipeList />
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipes" element={<Recipes />} />
+        <Route path="/recipes/:id" element={<RecipeDetails />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 }
-
-export default App;

@@ -1,25 +1,18 @@
-// server/my-app/models/Recipe.js
+// server/my-app/models/recipe.js
 const mongoose = require('mongoose');
 
 // Tworzenie schematu dla przepisu
-const recipeSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
+const recipeSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    ingredients: { type: [String], required: true },
+    steps: { type: [String], required: true },
+    imageUrl: { type: String, default: "" },
+    views: { type: Number, default: 0 },
   },
-  description: {
-    type: String,
-    required: true
-  },
-  ingredients: {
-    type: [String], // Lista składników
-    required: true
-  },
-  steps: {
-    type: [String], // Lista kroków przepisu
-    required: true
-  }
-});
+  { timestamps: true }
+);
 
 // Tworzenie modelu
 const Recipe = mongoose.model('Recipe', recipeSchema);

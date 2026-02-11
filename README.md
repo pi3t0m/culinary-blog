@@ -269,7 +269,7 @@ MIT
 
 ## Authors
 
-Edward – Full‑Stack Developer
+Pi3t0m – Full‑Stack Developer
 
 ---
 

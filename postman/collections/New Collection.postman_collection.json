@@ -1,0 +1,68 @@
+{
+  "info": {
+    "_postman_id": "16975623-441f-4287-9c6e-a2c9fbdfaead",
+    "name": "New Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET health",
+      "id": "cac99aed-2499-49d7-8106-eff9fa41a5bb",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "id": "845720a8-f25a-458d-a9cb-68c261a0770a",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Pierogi\",\r\n  \"description\": \"Test\",\r\n  \"ingredients\": [\"mąka\", \"woda\"],\r\n  \"steps\": [\"Zagnieć\", \"Ulep\", \"Ugotuj\"]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/recipes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "recipes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "id": "a4f2eaec-da9d-4927-a219-fa7ec2d5abe3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ]
+}

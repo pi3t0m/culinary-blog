@@ -28,10 +28,6 @@ app.use(cors());
 app.get('/api/health', (req, res) => {
   res.json({ ok: true });
 });
-app.get('/api/recipes', (req, res) => {
-  res.json([{ id: '1', title: 'Test', description: 'Działa połączenie' }]);
-});
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/recipes', recipesRouter);
