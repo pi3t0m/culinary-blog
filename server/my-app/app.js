@@ -5,10 +5,15 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const swaggerUi = require("swagger-ui-express");
+
 const connectDatabase = require("./config/database");
+const swaggerSpec = require("./config/swagger");
+
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const recipesRouter = require("./routes/recipes");
+
 const errorHandler = require("./middleware/errorHandler");
 
 dotenv.config();
@@ -30,6 +35,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/api/health", (req, res) => {
   res.json({ ok: true });
 });
+
+app.use(
+  "/api/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec)
+);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

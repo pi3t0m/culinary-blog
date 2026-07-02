@@ -12,10 +12,14 @@
     "debug": "~2.6.9",
     "dotenv": "^17.2.4",
     "express": "^4.22.1",
+    "express-validator": "^7.3.2",
     "http-errors": "~1.6.3",
     "mongoose": "^9.1.6",
     "morgan": "^1.10.1",
-    "pug": "^3.0.3"
+    "pug": "^3.0.3",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

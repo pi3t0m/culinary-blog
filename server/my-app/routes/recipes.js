@@ -10,11 +10,16 @@ const {
 
 const router = express.Router();
 
-router.post("/", createRecipe);
+const {
+  recipeValidationRules,
+  validateRecipe,
+} = require("../middleware/validateRecipe");
+
+router.post("/", recipeValidationRules, validateRecipe, createRecipe);
 router.get("/", getAllRecipes);
 router.get("/popular", getPopularRecipes);
 router.get("/:id", getRecipeById);
-router.put("/:id", updateRecipe);
+router.put("/:id", recipeValidationRules, validateRecipe, updateRecipe);
 router.delete("/:id", deleteRecipe);
 
 module.exports = router;
