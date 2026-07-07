@@ -1,0 +1,103 @@
+openapi: 3.0.0
+
+info:
+  title: Culinary Blog API
+  description: API for Culinary Blog application
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+
+tags:
+  - name: Recipes
+    description: Recipe management
+
+paths:
+
+  /api/health:
+    get:
+      tags:
+        - Health
+      summary: Check API status
+      responses:
+        "200":
+          description: API is running
+
+  /api/recipes:
+    get:
+      tags:
+        - Recipes
+      summary: Get all recipes
+      responses:
+        "200":
+          description: List of recipes
+
+    post:
+      tags:
+        - Recipes
+      summary: Create new recipe
+      requestBody:
+        required: true
+      responses:
+        "201":
+          description: Recipe created
+
+  /api/recipes/popular:
+    get:
+      tags:
+        - Recipes
+      summary: Get popular recipes
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+      responses:
+        "200":
+          description: Popular recipes
+
+  /api/recipes/{id}:
+    get:
+      tags:
+        - Recipes
+      summary: Get recipe by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Recipe details
+        "404":
+          description: Recipe not found
+
+    put:
+      tags:
+        - Recipes
+      summary: Update recipe
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Recipe updated
+
+    delete:
+      tags:
+        - Recipes
+      summary: Delete recipe
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Recipe deleted

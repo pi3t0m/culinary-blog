@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "../styles/Page.css";
+import "@/styles/Page.css";
 
 const navClass = ({ isActive }) => `nav__link${isActive ? " nav__link--active" : ""}`;
 
@@ -15,6 +15,9 @@ export default function Navbar() {
           <NavLink to="/" end className={navClass}>
             Home
           </NavLink>
+          <NavLink to="/recipes/new" className={navClass}>
+            Dodaj przepis
+            </NavLink>
           <NavLink to="/recipes" className={navClass}>
             Przepisy
           </NavLink>

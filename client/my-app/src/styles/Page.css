@@ -305,3 +305,27 @@ body.homeBg {
   border-color: rgba(124, 58, 237, 0.35);
   background: rgba(124, 58, 237, 0.14);
 }
+
+.input, .textarea {
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(11, 15, 20, 0.35);
+  color: rgba(230, 237, 243, 0.92);
+  outline: none;
+}
+
+.textarea { resize: vertical; min-height: 120px; }
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  background: rgba(124, 58, 237, 0.18);
+  color: rgba(240, 232, 255, 0.92);
+  cursor: pointer;
+}
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }

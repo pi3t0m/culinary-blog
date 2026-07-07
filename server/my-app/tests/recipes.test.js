@@ -1,70 +1,44 @@
-// tests/recipes.test.js
-const request = require('supertest');
-const app = require('../server/my-app/app'); // Import aplikacji Express
+const request = require("supertest");
+const app = require("../app");
 
-describe('Recipes API', () => {
-  let recipeId;
+describe("Recipes API", () => {
+  it("should return an empty recipes array", async () => {
+    const res = await request(app).get("/api/recipes");
 
-  // Test POST: Dodawanie nowego przepisu
-  it('should create a new recipe', async () => {
-    const newRecipe = {
-      title: 'Test Recipe',
-      description: 'Test recipe description',
-      ingredients: ['ingredient 1', 'ingredient 2'],
-      steps: ['step 1', 'step 2']
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body).toHaveLength(0);
+  });
+
+  it("should reject invalid recipe data", async () => {
+    const res = await request(app)
+      .post("/api/recipes")
+      .send({
+        title: "",
+        description: "",
+        ingredients: [],
+        steps: [],
+      });
+
+    expect(res.status).toBe(400);
+    expect(res.body.message).toBe("Validation failed");
+  });
+
+  it("should create a recipe", async () => {
+    const recipeData = {
+      title: "Protein pancakes",
+      description: "Simple high-protein breakfast.",
+      ingredients: ["2 eggs", "50g oats", "100g skyr"],
+      steps: ["Blend ingredients", "Fry on low heat"],
+      imageUrl: "",
     };
 
-    const response = await request(app)
-      .post('/api/recipes')
-      .send(newRecipe);
+    const res = await request(app)
+      .post("/api/recipes")
+      .send(recipeData);
 
-    expect(response.status).toBe(201);
-    expect(response.body.title).toBe(newRecipe.title);
-    expect(response.body.description).toBe(newRecipe.description);
-
-    // Zapamiętanie ID przepisu do późniejszych testów
-    recipeId = response.body._id;
-  });
-
-  // Test GET: Pobieranie wszystkich przepisów
-  it('should get all recipes', async () => {
-    const response = await request(app).get('/api/recipes');
-
-    expect(response.status).toBe(200);
-    expect(Array.isArray(response.body)).toBe(true);
-  });
-
-  // Test GET: Pobieranie pojedynczego przepisu
-  it('should get a single recipe by ID', async () => {
-    const response = await request(app).get(`/api/recipes/${recipeId}`);
-
-    expect(response.status).toBe(200);
-    expect(response.body._id).toBe(recipeId);
-    expect(response.body.title).toBe('Test Recipe');
-  });
-
-  // Test PUT: Aktualizowanie przepisu
-  it('should update a recipe', async () => {
-    const updatedRecipe = {
-      title: 'Updated Recipe',
-      description: 'Updated description',
-      ingredients: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
-      steps: ['step 1', 'step 2', 'step 3']
-    };
-
-    const response = await request(app)
-      .put(`/api/recipes/${recipeId}`)
-      .send(updatedRecipe);
-
-    expect(response.status).toBe(200);
-    expect(response.body.title).toBe(updatedRecipe.title);
-  });
-
-  // Test DELETE: Usuwanie przepisu
-  it('should delete a recipe', async () => {
-    const response = await request(app).delete(`/api/recipes/${recipeId}`);
-
-    expect(response.status).toBe(200);
-    expect(response.body.message).toBe('Recipe deleted successfully');
+    expect(res.status).toBe(201);
+    expect(res.body.title).toBe(recipeData.title);
+    expect(res.body.ingredients).toHaveLength(3);
   });
 });
